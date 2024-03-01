@@ -1,8 +1,13 @@
+# remake of the game Flappy Bird (originally created by Dong Nguyen)
+# Currently in progress, by Nuaiman
+
+
 import pygame
 
 import assets
 import configs
 from objects.background import Background
+from objects.column import Column
 from objects.floor import Floor
 
 pygame.init()
@@ -22,6 +27,7 @@ Background( 1, sprites)
 Floor(0, sprites)
 Floor(1, sprites)
 
+Column(sprites)
 
 while on:
     for event in pygame.event.get():
