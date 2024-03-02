@@ -14,7 +14,8 @@ pygame.init()
 
 screen = pygame.display.set_mode((configs.SCREEN_WIDTH, configs.SCREEN_HEIGHT))
 clock = pygame.time.Clock()
-on = True
+column_create_event = pygame.USEREVENT
+running = True
 
 assets.load_sprites()
 
@@ -26,13 +27,18 @@ Background( 1, sprites)
 
 Floor(0, sprites)
 Floor(1, sprites)
-
+# First pipe
 Column(sprites)
 
-while on:
+pygame.time.set_timer(column_create_event, 1500)
+
+while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            on = false
+            running = False
+        if event.type == column_create_event:
+            # Continuing the rest of the pipes
+            Column(sprites)
 
     screen.fill("pink")
 
