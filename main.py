@@ -7,6 +7,7 @@ import pygame
 import assets
 import configs
 from objects.background import Background
+from objects.bird import Bird
 from objects.column import Column
 from objects.floor import Floor
 
@@ -28,7 +29,7 @@ Background( 1, sprites)
 Floor(0, sprites)
 Floor(1, sprites)
 # First pipe
-Column(sprites)
+bird = Bird(sprites)
 
 pygame.time.set_timer(column_create_event, 1500)
 
