@@ -2,11 +2,15 @@ import random
 import pygame.sprite
 import assets
 import configs
+from layer import Layer
+
 
 # Define a class for creating columns in the game
 class Column(pygame.sprite.Sprite):
     def __init__(self, *groups):
-        super().__init__(*groups)
+
+        # Rendering order of sprites, collision detection, and other game logic that depends on the layering of objects in the game scene
+        self._layer = Layer.OBSTACLE
         # Set the gap between top and bottom pipes
         self.gap = 100
         # Load the sprite for the pipe
@@ -30,7 +34,12 @@ class Column(pygame.sprite.Sprite):
         # Generate a pipe with a gap at a random height
         self.rect = self.image.get_rect(midleft=(configs.SCREEN_WIDTH, random.uniform(min_y, max_y)))
 
+        self.mask = pygame.mask.from_surface(self.image)
+        super().__init__(*groups)
+
     def update(self):
-        self.rect.x -= 1
+        # This effectively makes the column move horizontally across the screen from right to left.
+        self.rect.x -= 2
+        # The column has moved entirely out of view and should be removed from the game
         if self.rect.right <= 0:
             self.kill()
