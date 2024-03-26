@@ -17,6 +17,7 @@ screen = pygame.display.set_mode((configs.SCREEN_WIDTH, configs.SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 column_create_event = pygame.USEREVENT
 running = True
+gameover = False
 
 assets.load_sprites()
 
@@ -38,13 +39,18 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == column_create_event:
-            # Continuing the rest of the pipes
+            # Generating the pipes
             Column(sprites)
+        bird.handle_event(event)
 
-    screen.fill("pink")
+    screen.fill(0)
 
     sprites.draw(screen)
-    sprites.update()
+    if not gameover:
+        sprites.update()
+
+    if bird.check_collision(sprites):
+        gameover = True
 
     pygame.display.flip()
     clock.tick(configs.FPS)
