@@ -1,3 +1,6 @@
+import pygame.sprite
+
+import assets
 import configs
 from layer import Layer
 
