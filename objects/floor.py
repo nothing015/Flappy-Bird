@@ -13,7 +13,9 @@ class Floor(pygame.sprite.Sprite):
         self._layer = Layer.FLOOR
         # Load the floor image sprite
         self.image = assets.get_sprite("floor")
+        # Getting the rectangle of the floor image and positioning it at the bottom left corner of the screen.
         self.rect = self.image.get_rect(bottomleft=(configs.SCREEN_WIDTH * index,configs.SCREEN_HEIGHT))
+        # Creating a collision mask for the floor sprite based on its image.
         self.mask = pygame.mask.from_surface(self.image)
 
         # Initialize the sprite
