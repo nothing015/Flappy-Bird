@@ -22,8 +22,10 @@ class Bird(pygame.sprite.Sprite):
 
         # Load the floor image sprite
         self.image = assets.get_sprite("redbird-midflap")
-        # Get the rectangle of the bird image
+        # Get the rectangle of the bird image and place it at the desired coordinates
         self.rect = self.image.get_rect(topleft=(-50, 50))
+        # For checking collision of the bird with any other object
+        self.mask = pygame.mask.from_surface(self.image)
 
         self.flap = 0
         # Initialize the sprite
@@ -40,7 +42,6 @@ class Bird(pygame.sprite.Sprite):
         self.flap -= configs.GRAVITY
         self.rect.y -= self.flap
         # Create a mask for pixel-perfect collision detection
-        self.mask = pygame.mask.from_surface(self.image)
 
         # Starts with throwing the bird like a projectile
         if self.rect.x < 50:
